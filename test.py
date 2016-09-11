@@ -7,3 +7,5 @@ l = [];
 l .append(1);
 print type(l)
 print l
+newarr = [x for x in  range(10)];
+print  newarr;
