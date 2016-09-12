@@ -8,9 +8,12 @@ class Solution(object):
         """
         from collections import *
         graph = defaultdict(dict);
-        for i in range (len(values)) :
-            graph[equations[i][0]].update({equations[i][1] : values[i]});
-            graph[equations[i][1]].update({equations[i][0] : 1 /values[i]});
+        for (s,d), value in zip(equations,values):
+            graph[s][d] = value;
+            graph[d][s] = 1 / value;
+        # for i in range (len(values)) :
+        #     graph[equations[i][0]].update({equations[i][1] : values[i]});
+        #     graph[equations[i][1]].update({equations[i][0] : 1 /values[i]});
         res = [];
         # print graph;
         for i in range(len(query)):
