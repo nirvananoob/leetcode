@@ -50,10 +50,13 @@ class Solution(object):
             # print _list;
         return;
 
+
 if __name__ == '__main__':
     # k = 3;
     # number = 5;
     solution = Solution();
+    # for i in range(10):
+    #     print 2;
     print solution.combinations(20,3);
 
 
