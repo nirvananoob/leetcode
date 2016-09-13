@@ -1,25 +1,25 @@
 class Solution:
     def valid(self, _list):
         from collections import defaultdict;
-        _set = defaultdict(int);
+        _map = defaultdict(int);
         for i in _list:
-            _set[i] += 1;
-        print _set;
-        _list = [];
+            _map[i] += 1;
+        # print _map;
+        _set = _map.keys();
         for key in _set:
-            if _set[key] >= 2:
-                _list.append(key); 
-        print _list; 
-        for temp in _list :
-            l = temp - 1;
-            r = temp + 1;
-            while l in _list:
-                # _list.remove(l);
+            if _map[key] < 2:
+                _set.remove(key);
+        # print type(_set),_set;
+        for k in _set :
+            l = k - 1;
+            r = k + 1;
+            while l in _set:
+                _set.remove(l);
                 l -= 1;
-            while  r in _list:
-                # _list.remove(r);
+            while  r in _set:
+                _set.remove(r);
                 r += 1;
-            print l, temp, r
+            
             if r - l - 1 >= 3:
                 return True;
             # else:
