@@ -6,6 +6,7 @@ class Solution:
             _map[i] += 1;
         # print _map;
         _set = _map.keys();
+        print type(_set);
         for key in _set:
             if _map[key] < 2:
                 _set.remove(key);
@@ -25,7 +26,7 @@ class Solution:
             # else:
             #     _list.remove(temp);
         return False;
-
+[219,130,167,113,225,151,149,32]
 
 #test
 if __name__ == '__main__':

@@ -1,42 +1,36 @@
 package two_pointer;
-//Given a string source and a string target, find the minimum window in source which will contain all the characters in target.
 
-
+/**
+ * Given a string source and a string target, find the minimum window in source
+ * which will contain all the characters in target.
+ */
 public class minimum_window_substring {
-	int initTargetHash(int []targethash, String Target) {
-        int targetnum =0 ;
-        for (char ch : Target.toCharArray()) {
-            targetnum++;
-            targethash[ch]++;
-        }
-        return targetnum;
-    }
-    public String minWindow(String Source, String Target) {
-        // queueing the position that matches the char in T
-        int ans = Integer.MAX_VALUE;
-        String minStr = "";
-        
-        int[] targethash = new int[256];
-        
-        int targetnum = initTargetHash(targethash, Target);
-        int sourcenum = 0;
-        int j = 0, i = 0;
-        for(i = 0; i < Source.length(); i++) {
-            if(targethash[Source.charAt(i)] > 0)
-                sourcenum++;
-            
-            targethash[Source.charAt(i)]--;
-            while(sourcenum>=targetnum) {
-                if(ans > i - j + 1) {
-                    ans = Math.min(ans, i - j + 1);
-                    minStr = Source.substring(j, i + 1);
-                }
-                targethash[Source.charAt(j)]++;
-                if(targethash[Source.charAt(j)] > 0)
-                    sourcenum--;
-                j ++;
-            }
-        }
-        return minStr;
-    }
+	public String minWindow(String s, String t) {
+		if (s == null || s.length() == 0 || t == null || t.length() == 0) {
+			return t;
+		}
+		int[] dict = new int[256];
+		for (char c : t.toCharArray()) {
+			dict[c]++;
+		}
+		int counter = t.length();
+		char[] chars = s.toCharArray();
+		int start = 0, end = 0;
+		int head = 0, d = Integer.MAX_VALUE;
+		while (end < chars.length) {
+			if (dict[chars[end++]]-- > 0) {
+				counter--;
+			}
+			while (counter == 0) {
+				if (d > end - start) {
+					d = end - start;
+					head = start;
+				}
+				if (dict[chars[start++]]++ == 0) {
+					counter++;
+				}
+			}
+		}
+		return d == Integer.MAX_VALUE ? "" : s.substring(head, head + d);
+	}
 }
